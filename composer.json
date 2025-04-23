@@ -1,0 +1,19 @@
+{
+    "name": "ronanzenatti/projeto-vendas",
+    "description": "Projeto desenvolvido na aula de Programação para Internet - Fatec Jahu",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ronan Adriel Zenatti",
+            "email": "ronan.zenatti@fatec.sp.gov.br"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
