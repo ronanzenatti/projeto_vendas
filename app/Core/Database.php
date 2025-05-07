@@ -13,7 +13,7 @@ class Database
     {
         $host = 'localhost'; // Endereço do servidor de BD
         $porta = '3306'; // Porta do servidor de BD
-        $banco = 'sistema_vendas'; // Nome do banco de dados
+        $banco = 'projeto_vendas'; // Nome do banco de dados
         $usuario = 'root'; // Usuário padrão do XAMPP
         $senha = ''; // Senha padrão do XAMPP (vazia)
 
