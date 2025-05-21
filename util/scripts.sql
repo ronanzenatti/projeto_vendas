@@ -1,0 +1,2 @@
+
+INSERT INTO usuarios (id_usuario, nome, cpf, data_nascimento, celular, rua, numero, complemento, bairro, cidade, cep, estado, email, tipo, senha, created_at, updated_at, deleted_at) VALUES (NULL, 'Ronan Adriel Zenatti', '355.936.478-79', '1988-02-25', '(14) 98157-5657', 'Rua dos Lavradores', '302', NULL, 'Vila Nossa Senhora Aparecida', 'Boracéia', '17.270-032', 'SP', 'ronan.zenatti@fatec.sp.gov.br', 'Administrador', 'lqwqwoboqrg woeiufgbqwufgqwgfqweuhqwuiçñ', current_timestamp(), current_timestamp(), NULL);

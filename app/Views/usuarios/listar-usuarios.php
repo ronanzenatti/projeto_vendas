@@ -14,7 +14,7 @@
 </div>
 
 <pre>
-    <?php print_r($usuarios) ?>
+    <?php // print_r($usuarios) ?>
 </pre>
 
 <div class="card border-0 shadow-sm mb-4 table-container">
@@ -48,24 +48,22 @@
                         <th scope="col">E-mail</th>
                         <th scope="col">Telefone</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Foreach percorre a lista recebida e coloca
+                     cada item da lista $usuarios que veio do controller
+                      na variavel $user -->
+                    <?php foreach($usuarios as $user): ?>
                     <tr>
-                        <td>001</td>
-                        <td>Ricardo Oliveira</td>
-                        <td>ricardo.oliveira@email.com</td>
-                        <td>(11) 98765-4321</td>
-                        <td><span class="badge bg-primary">Administrador</span></td>
-                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td><?= $user['id_usuario'] ?></td>
+                        <td><?= $user['nome'] ?></td>
+                        <td><?= $user['email'] ?></td>
+                        <td><?= $user['celular'] ?></td>
+                        <td><span class="badge bg-primary"><?= $user['tipo'] ?></span></td>            
                         <td>
-                            <a href="detalhes-usuario.html"
-                                class="btn btn-sm btn-outline-primary btn-action" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="editar-usuario.html"
+                            <a href="/usuarios/<?= $user['id_usuario'] ?>/editar"
                                 class="btn btn-sm btn-outline-success btn-action" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </a>
@@ -74,89 +72,7 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>Ana Silva</td>
-                        <td>ana.silva@email.com</td>
-                        <td>(11) 91234-5678</td>
-                        <td><span class="badge bg-info text-dark">Funcionário</span></td>
-                        <td><span class="badge bg-success">Ativo</span></td>
-                        <td>
-                            <a href="detalhes-usuario.html"
-                                class="btn btn-sm btn-outline-primary btn-action" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="editar-usuario.html"
-                                class="btn btn-sm btn-outline-success btn-action" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-outline-danger btn-action" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>João Santos</td>
-                        <td>joao.santos@email.com</td>
-                        <td>(11) 98888-7777</td>
-                        <td><span class="badge bg-secondary">Cliente</span></td>
-                        <td><span class="badge bg-success">Ativo</span></td>
-                        <td>
-                            <a href="detalhes-usuario.html"
-                                class="btn btn-sm btn-outline-primary btn-action" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="editar-usuario.html"
-                                class="btn btn-sm btn-outline-success btn-action" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-outline-danger btn-action" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>004</td>
-                        <td>Carla Mendes</td>
-                        <td>carla.mendes@email.com</td>
-                        <td>(11) 97777-6666</td>
-                        <td><span class="badge bg-secondary">Cliente</span></td>
-                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
-                        <td>
-                            <a href="detalhes-usuario.html"
-                                class="btn btn-sm btn-outline-primary btn-action" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="editar-usuario.html"
-                                class="btn btn-sm btn-outline-success btn-action" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-outline-danger btn-action" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>005</td>
-                        <td>Roberto Oliveira</td>
-                        <td>roberto.oliveira@email.com</td>
-                        <td>(11) 96666-5555</td>
-                        <td><span class="badge bg-secondary">Cliente</span></td>
-                        <td><span class="badge bg-danger">Bloqueado</span></td>
-                        <td>
-                            <a href="detalhes-usuario.html"
-                                class="btn btn-sm btn-outline-primary btn-action" title="Visualizar">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="editar-usuario.html"
-                                class="btn btn-sm btn-outline-success btn-action" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-outline-danger btn-action" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

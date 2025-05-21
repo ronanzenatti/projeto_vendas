@@ -1,8 +1,11 @@
 <?php
+session_start();
 // Importa o autoload do Composer para carregar as rotas
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Models\Usuario;
+use App\Controllers\UsuarioController;
+// Instancia o controller de Usuário para ser utilizado (Cria o Objeto)
+$usuarioCtrl = new UsuarioController();
 
 // Injeta o conteudo das páginas de rota dentro do template base.php
 function render($view, $data = [])
@@ -37,14 +40,17 @@ if ($url == "/") {
 } else if ($url == "/dashboard") {
     render('dashboard.php', ['title' => 'Dashboard - LivroTech']);
 } else if ($url == "/usuarios") {
-    $usuarios = Usuario::buscarTodos();
+    $usuarios = $usuarioCtrl->listar();
 
-    render("usuarios/listar-usuarios.php", ['title' => 'Usuários - LivroTech', 
-"usuarios" => $usuarios
-]);
 } else if ($url == "/usuarios/novo") {
-    render("usuarios/form-usuario.php", ['title' => 'Cadastrar Usuário - LivroTech']);
-}
+    $usuarios = $usuarioCtrl->novo();
+} 
+// Verifica também se veio por POST a rota
+else if ($url == "/usuarios/salvar" && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $usuarios = $usuarioCtrl->salvar();
+} 
+
+
 // Outras rotas entram aqui...
 else {
     http_response_code(404);
