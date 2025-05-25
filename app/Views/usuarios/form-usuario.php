@@ -1,10 +1,22 @@
 <?php
-    if (isset($_SESSION['erros'])){
-        echo "<pre>";
-        print_r($_SESSION['erros']);
-        echo "</pre>";
-    }
+if ($_SESSION['dados']) {
+    $dados = $_SESSION['dados'];
+}
+
+if (isset($_SESSION['erros'])):
+    $erros = $_SESSION['erros'];
 ?>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Erro ao cadastrar!</h4>
+        <p>Verifique os itens abaixo em seu formulário antes de tentar novamente!</p>
+        <ul>
+            <?php foreach ($erros as $e): ?>
+                <li><?= $e ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif;
+unset($_SESSION['erros']); ?>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -24,7 +36,9 @@
                 <div class="card-body p-4">
                     <div class="mb-3">
                         <label for="nomeCompleto" class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" id="nomeCompleto" name="nome" required>
+                        <input type="text" class="form-control"
+                            value="<?= isset($dados['nome']) ? $dados['nome'] : null ?>"
+                            id="nomeCompleto" name="nome" required>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -68,8 +82,12 @@
                     <div class="">
                         <label for="tipoUsuario" class="form-label">Tipo de Usuário</label>
                         <select class="form-select" id="tipoUsuario" required name="tipo">
-                            <option selected disabled value="">Selecione...</option>
-                            <option value="Cliente">Cliente</option>
+                            <option disabled value="">Selecione...</option>
+                            
+                            <option 
+                <?= isset($dados['tipo']) && $dados['tipo'] == "Cliente" ? "selected" : null ?> 
+                                value="Cliente">Cliente</option>
+
                             <option value="Funcionário">Funcionário</option>
                             <option value="Administrador">Administrador</option>
                         </select>

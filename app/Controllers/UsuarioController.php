@@ -62,7 +62,7 @@ class UsuarioController
         } else {
             // Chama o Model passando os dados
             Usuario::salvar($dados);
-            $_SESSION['mensagem'] = "Usuário cadastrado com sucesso!";
+            $_SESSION['mensagem'] = "Usuário: " . $dados['nome'] . ", cadastrado com sucesso!";
             $_SESSION['tipo_mensagem'] = "success";
             header('Location: /usuarios');
         }
