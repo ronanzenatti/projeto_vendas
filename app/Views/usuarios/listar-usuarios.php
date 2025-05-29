@@ -13,14 +13,14 @@
     </a>
 </div>
 
-<?php 
+<?php
 if (isset($_SESSION['mensagem'])):
 ?>
-<div class="alert alert-<?= $_SESSION['tipo_mensagem'] ?> alert-dismissible fade show" role="alert">
-  <strong>Sucesso!</strong> <?= $_SESSION['mensagem'] ?>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<?php 
+    <div class="alert alert-<?= $_SESSION['tipo_mensagem'] ?> alert-dismissible fade show" role="alert">
+        <strong>Sucesso!</strong> <?= $_SESSION['mensagem'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php
 endif;
 unset($_SESSION['mensagem']);
 unset($_SESSION['tipo_mensagem']);
@@ -64,26 +64,52 @@ unset($_SESSION['tipo_mensagem']);
                     <!-- Foreach percorre a lista recebida e coloca
                      cada item da lista $usuarios que veio do controller
                       na variavel $user -->
-                    <?php foreach($usuarios as $user): ?>
-                    <tr>
-                        <td><?= $user['id_usuario'] ?></td>
-                        <td><?= $user['nome'] ?></td>
-                        <td><?= $user['email'] ?></td>
-                        <td><?= $user['celular'] ?></td>
-                        <td><span class="badge bg-primary"><?= $user['tipo'] ?></span></td>            
-                        <td>
-                            <a href="/usuarios/<?= $user['id_usuario'] ?>/editar"
-                                class="btn btn-sm btn-outline-success btn-action" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-outline-danger btn-action" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <?php foreach ($usuarios as $user): ?>
+                        <tr>
+                            <td><?= $user['id_usuario'] ?></td>
+                            <td><?= $user['nome'] ?></td>
+                            <td><?= $user['email'] ?></td>
+                            <td><?= $user['celular'] ?></td>
+                            <td><span class="badge bg-primary"><?= $user['tipo'] ?></span></td>
+                            <td>
+                                <a href="/usuarios/<?= $user['id_usuario'] ?>/editar"
+                                    class="btn btn-sm btn-outline-success btn-action" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger btn-action"
+                                    onclick="deletarFisico(<?= $user['id_usuario'] ?>)"
+                                    title="Excluir Físico" type="button">
+                                    Físico
+                                </button>
+
+                                <button class="btn btn-sm btn-outline-danger btn-action"
+                                    onclick="deletarLogico(<?= $user['id_usuario'] ?>)"
+                                    title="Excluir Lógico" type="button">
+                                    Lógico
+                                </button>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<script>
+    function deletarFisico(id) {
+        if (confirm("Deseja deletar PERMANENTEMENTE este usuário?")) {
+            window.location.href = `/usuarios/${id}/del-fisico`;
+        } else {
+            alert("Cancelado!");
+        }
+    }
+
+    function deletarLogico(id) {
+        if (confirm("Deseja DESATIVAR este usuário?")) {
+            window.location.href = `/usuarios/${id}/del-logico`;
+        } else {
+            alert("Cancelado!");
+        }
+    }
+</script>
