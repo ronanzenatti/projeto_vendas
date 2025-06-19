@@ -1,5 +1,13 @@
+<?php
+if (isset($_SESSION['usuario_email'])) {
+    header('Location: /dashboard');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +19,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <!-- Cabeçalho -->
     <header class="bg-primary text-white">
@@ -45,6 +54,21 @@
     <!-- Conteúdo Principal -->
     <main class="auth-container py-5">
         <div class="container">
+            <?php
+            if (isset($_SESSION['erros'])):
+                $erros = $_SESSION['erros'];
+            ?>
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Erro ao entrar!</h4>
+                    <ul>
+                        <?php foreach ($erros as $e): ?>
+                            <li><?= $e ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif;
+            unset($_SESSION['erros']); ?>
+
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="card shadow-lg border-0 rounded-lg animated">
@@ -55,19 +79,21 @@
                             <div class="text-center mb-4">
                                 <p>Entre com suas credenciais para acessar o sistema</p>
                             </div>
-                            <form>
+                            <form action="/entrar" method="POST">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">E-mail</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="seu@email.com" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="senha" class="form-label">Senha</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                        <input type="password" class="form-control" id="senha" placeholder="Sua senha" required>
+                                        <input type="password" class="form-control" name="senha"
+                                            id="senha" placeholder="Sua senha" required>
                                     </div>
                                 </div>
                                 <div class="form-check mb-3">
@@ -116,4 +142,5 @@
     <!-- Bootstrap 5.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
